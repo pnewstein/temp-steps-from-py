@@ -21,7 +21,10 @@ def write_temp_steps_from_py(dt, csvpath):
     csvpath (str): the path to the csv. default is "temps.csv"
     """
     # read csv
-    temps = [float(t) for t in (Path(csvpath).read_text()).split(sep)]
+    try:
+        temps = [float(t) for t in (Path(csvpath).read_text()).split(sep)]
+    except FileNotFoundError as error:
+        raise FileNotFoundError(f"could not find {csvpath}. Are you in the right directory?") from error
     msg = "temps must be between 0 and 50"
     assert min(temps) >= 0 and max(temps) <=50, msg
     
@@ -42,11 +45,12 @@ def write_temp_steps_from_py(dt, csvpath):
 if __name__ == "__main__":
     #handle default args
     csvpath = "temps.csv"
-    dt = 60 #s
+    if len(sys.argv) == 1:
+        raise ValueError("Specify a dt for the csv")
     if len(sys.argv) > 1:
         dt = sys.argv[1]
     if len(sys.argv) > 2:
         csvpath = sys.argv[2]
     # run
     write_temp_steps_from_py(dt, csvpath)
-    print("sucsessful")
+    print("successful")
