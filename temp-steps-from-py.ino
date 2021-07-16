@@ -359,7 +359,7 @@ const byte temps[] ={20,
 20,
 20};
 const int ntemps = 360;
-const float dt = 60;
+const float dt = .1;
 // end py
 
 // the pin for the output

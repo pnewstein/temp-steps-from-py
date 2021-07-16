@@ -9,8 +9,8 @@ from pathlib import Path
 import sys
 
 #config
-sep = ","
-ino_path = "temp_steps_from_py.ino"
+sep = "," # the seperation for the csv file
+ino_path = "temp-steps-from-py.ino"
 ino_splitter = "// end py"
 
 def write_temp_steps_from_py(dt, csvpath):
